@@ -6,8 +6,6 @@ public class Main {
 		
 		//Creating instance of FileReader
 		FileReader read = new FileReader();
-		//Initialize list of tutees
-		Tutee[] tutees = new Tutee[read.numOfTutees()];
 
 	}
 

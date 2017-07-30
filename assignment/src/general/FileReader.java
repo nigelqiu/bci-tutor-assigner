@@ -31,4 +31,28 @@ public class FileReader {
 		return tuteeNum;
 	}
 	
+	//Returns an Array of initialized tutees
+	public Tutee[] initTuteeArr() {
+		Tutee[] tutees = new Tutee[numOfTutees()];
+		
+		try (BufferedReader reader = Files.newBufferedReader(tuteeFile)) {
+		    String line = null;
+		    while ((line = reader.readLine()) != null) {
+		    	//Variable holds the index of the current tutee being read
+		    	int index = -1;
+		    	//Finding the start of a tutee data block
+		    	if (line.contains("Name")) {
+		    		//Increments the index
+		    		index++;
+		    		
+		    	}
+		    }
+		    reader.close();
+		} catch (IOException x) {
+		    System.err.format("IOException: %s%n", x);
+		}
+		
+		return tutees;
+	}
+	
 }
