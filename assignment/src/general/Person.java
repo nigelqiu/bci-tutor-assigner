@@ -18,4 +18,35 @@ public class Person {
 	// The index corresponds to the course requested at the same index
 	private int[] groupSize;
 
+	//Methods for String name
+	public void setName(String n) {
+		name = n;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	//Methods for List courses
+	public void addCourse(String course) {
+		courses.add(course);
+	}
+	
+	public String getCourse(int course) {
+		return courses.get(course);
+	}
+	
+	public void removeCourse(int course) {
+		courses.remove(course);
+	}
+	
+	public boolean areCoursesEmpty() {
+		return courses.isEmpty();
+	}
+	
+	//Methods for List times
+	public void addTime(String time) {
+		times.add(time);
+	}
+	
 }
