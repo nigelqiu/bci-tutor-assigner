@@ -6,6 +6,7 @@ public class Main {
 		
 		//Creating instance of FileReader
 		FileReader read = new FileReader();
+		read.initTuteeArr();
 
 	}
 

@@ -11,13 +11,14 @@ public class Person {
 	private ArrayList<String> courses = new ArrayList<String>();
 	// List of times available
 	/*
-	 * First character - day of the week Second character - time slot
+	 * Tens digit - day of the week 
+	 * Ones digit - time slot
 	 */
-	private ArrayList<String> times = new ArrayList<String>();
+	private ArrayList<Integer> times = new ArrayList<Integer>();
 	// Array of tutoring group sizes requested
 	// The index corresponds to the course requested at the same index
 	private int[] groupSize;
-
+	
 	//Methods for String name
 	public void setName(String n) {
 		name = n;
@@ -45,11 +46,11 @@ public class Person {
 	}
 	
 	//Methods for List times
-	public void addTime(String time) {
+	public void addTime(int time) {
 		times.add(time);
 	}
 	
-	public String getTime(int slot) {
+	public int getTime(int slot) {
 		return times.get(slot);
 	}
 	

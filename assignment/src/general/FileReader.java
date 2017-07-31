@@ -44,7 +44,36 @@ public class FileReader {
 		    	if (line.contains("Name")) {
 		    		//Increments the index
 		    		index++;
+		    		//Creates a Tutee object at the index location
+		    		tutees[index] = new Tutee();
 		    		
+		    		//Sets the name of the Tutee object
+		    		tutees[index].setName(line.substring(6));
+		    		
+		    		//Reads the next line
+		    		line = reader.readLine();
+		    		
+		    		//While loop that exits once all the courses are added
+		    		while(true) {
+		    			//Adds the course
+		    			tutees[index].addCourse(line.substring(0, 4));
+		    			//Breaks if last course was added, else, removes the course that was added
+		    			if (line.length() == 4)
+		    				break;
+		    			else
+		    				line = line.substring(5);
+		    		}
+		    		
+		    		//Reads the next line
+		    		line = reader.readLine();
+		    		
+		    		//While loop that exits one all the time slots are added
+		    		while(true) {
+		    			//Adds the time slot
+		    			tutees[index].addTime(Integer.parseInt(line.substring(0, 2)));
+		    			//Temporary [WIP]
+		    			break;
+		    		}
 		    	}
 		    }
 		    reader.close();
