@@ -36,17 +36,43 @@ public class Person {
 		return courses.get(course);
 	}
 	
-	public void removeCourse(int course) {
-		courses.remove(course);
+	public int coursesSize() {
+		return courses.size();
 	}
 	
-	public boolean areCoursesEmpty() {
-		return courses.isEmpty();
+	public void removeCourse(int course) {
+		courses.remove(course);
 	}
 	
 	//Methods for List times
 	public void addTime(String time) {
 		times.add(time);
+	}
+	
+	public String getTime(int slot) {
+		return times.get(slot);
+	}
+	
+	public int timesSize() {
+		return times.size();
+	}
+	
+	public void removeTime(int slot) {
+		times.remove(slot);
+	}
+	
+	//Initializing Array groupSize
+	public void initGroupSize() {
+		groupSize = new int[courses.size()];
+	}
+	
+	//Methods for Array groupSize
+	public void setGroupSize(int course, int size) {
+		groupSize[course] = size;
+	}
+	
+	public int getGroupSize(int course) {
+		return groupSize[course];
 	}
 	
 }
