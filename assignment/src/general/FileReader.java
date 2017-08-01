@@ -71,8 +71,27 @@ public class FileReader {
 		    		while(true) {
 		    			//Adds the time slot
 		    			tutees[index].addTime(Integer.parseInt(line.substring(0, 2)));
-		    			//Temporary [WIP]
-		    			break;
+		    			//Breaks if last time slot was added, else, removes the time slot that was added
+		    			if (line.length() == 2)
+		    				break;
+		    			else
+		    				line = line.substring(3);
+		    		}
+		    		
+		    		//Reads the next line
+		    		line = reader.readLine();
+		    		
+		    		//Initializing groupSize array
+		    		tutees[index].initGroupSize();
+		    		
+		    		//For loop which increments for each index in groupSize
+		    		for (int i = 0; i < tutees[index].coursesSize(); i++) {
+		    			//Index value of the first space in line
+		    			int space = line.indexOf(' ');
+		    			//Reads the group size value to the related groupSize index
+		    			tutees[index].setGroupSize(i, Integer.parseInt(line.substring(0, space)));
+		    			if (!(line.length() == space))
+		    				line = line.substring(space + 1);
 		    		}
 		    	}
 		    }
