@@ -6,7 +6,10 @@ public class Main {
 		
 		//Creating instance of FileReader
 		FileReader read = new FileReader();
-		read.initTuteeArr();
+		//Initializing and loading an Array of Tutees
+		Tutee[] tutees = read.initTuteeArr();
+		//Initializing and loading an Array of Tutors
+		Tutor[] tutors = read.initTutorArr();
 
 	}
 
