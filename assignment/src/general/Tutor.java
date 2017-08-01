@@ -7,5 +7,8 @@ public class Tutor extends Person{
 	//Current number of sessions already assigned
 	private int curSessions = 0;
 	
+	public void setMaxSessions(int num) {
+		maxSessions = num;
+	}
 
 }

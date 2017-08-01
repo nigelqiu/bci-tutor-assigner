@@ -186,12 +186,18 @@ public class FileReader {
 		    		for (int i = 0; i < tutors[index].coursesSize(); i++) {
 		    			//Index value of the first space in line
 		    			int space = line.indexOf(' ');
-		    			//Reads the group size value to the related groupSize index
+		    			//Adds the group size value to the related groupSize index
 		    			tutors[index].setGroupSize(i, Integer.parseInt(line.substring(0, space)));
 		    			//Removes the last read group size value unless it is at the end of the string
 		    			if (!(line.length() == space))
 		    				line = line.substring(space + 1);
 		    		}
+		    		
+		    		//Reads the next line
+		    		line = reader.readLine();
+		    		
+		    		//Adds the value to maxSessions
+		    		tutors[index].setMaxSessions(Integer.parseInt(line));
 		    	}
 		    }
 		    reader.close();
