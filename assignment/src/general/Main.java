@@ -14,9 +14,11 @@ public class Main {
 		Tutor[] tutors = read.initTutorArr();
 		//Creating instance of Compatibility
 		Compatibility compatible = new Compatibility();
+		//Creating instance of FileWriter
+		FileWriter write = new FileWriter();
+		
 		//Boolean to run main while loop
 		Boolean run = true;
-		
 		//Precondition check to see if it is possible to run the main program
 		if (tutees.length == 0 || tutors.length == 0)
 			run = false;
@@ -32,6 +34,10 @@ public class Main {
 			}
 			
 			//
+			if (tutees[targetTutee].possibleTutorsSize() == 0) {
+				tutees[targetTutee].setAssigned(true);
+				
+			}
 		}
 
 	}
