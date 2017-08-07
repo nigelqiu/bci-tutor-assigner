@@ -22,8 +22,11 @@ public class Main {
 		//Precondition check to see if it is possible to run the main program
 		if (tutees.length == 0 || tutors.length == 0)
 			run = false;
+		
+		/* !Note! -Look into the below later- */
+		
 		//Integer assigned a random number within possible tutees index values to randomly select a tutee
-		int targetTutee = ThreadLocalRandom.current().nextInt(0, tutees.length + 1);
+		int targetTutee = ThreadLocalRandom.current().nextInt(0, tutees.length);
 		//Main while loop
 		while (run) {
 			//For loop to check the compatibility between each tutor and the target tutee
@@ -36,7 +39,7 @@ public class Main {
 			//
 			if (tutees[targetTutee].possibleTutorsSize() == 0) {
 				tutees[targetTutee].setAssigned(true);
-				
+				write.writeNonAssignment(tutees[targetTutee].getName(), tutees[targetTutee].getCourse(0));
 			}
 		}
 
