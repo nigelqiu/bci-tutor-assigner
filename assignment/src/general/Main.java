@@ -4,6 +4,18 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
 
+	public static Tutee[] removeTutee(Tutee[] tutees, int index) {
+		Tutee[] result = new Tutee[tutees.length - 1];
+		int counter = 0;
+		for (int i = 0; i < tutees.length; i++) {
+			if (i != index) {
+				result[counter] = tutees[i];
+				counter++;
+			}
+		}
+		return result;
+	}
+
 	public static void main(String[] args) {
 
 		// Creating instance of FileReader
@@ -41,23 +53,15 @@ public class Main {
 				}
 			}
 
-			/*Redo below*/
-			
-			// If the tutee has no possible tutors, mark the tutee as assigned and print a
-			// non-assignment statement
+			// If the tutee has no possible tutors, print a non-assignment statement and
+			// remove the tutee from the Array
 			if (tutees[targetTutee].possibleTutorsSize() == 0) {
-				tutees[targetTutee].setAssigned(true);
 				write.writeNonAssignment(tutees[targetTutee].getName(), tutees[targetTutee].getCourse(0));
+				tutees = removeTutee(tutees, targetTutee);
 			}
 
-			// 
-			for (int i = 0; i < tutees.length; i++) {
-				if (tutees[i].isAssigned()) {
-					targetTutee = ThreadLocalRandom.current().nextInt(0, tutees.length);
-				}
-			}
 		}
-		
+
 	}
-	
+
 }
