@@ -1,11 +1,16 @@
 package general;
 
+import java.util.ArrayList;
+
 public class Compatibility {
-	
+
 	/**
 	 * Checks whether the target course is found in the tutor's course list
-	 * @param course - The target course
-	 * @param tutor - The target tutor
+	 * 
+	 * @param course
+	 *            - The target course
+	 * @param tutor
+	 *            - The target tutor
 	 * @return true if the target course is found, false if not
 	 */
 	public boolean checkCourses(String course, Tutor tutor) {
@@ -15,11 +20,15 @@ public class Compatibility {
 		}
 		return false;
 	}
-	
+
 	/**
-	 * Checks whether a time matches on both the tutor's and tutee's availability schedule
-	 * @param tutee - The target tutee
-	 * @param tutor - The target tutor
+	 * Checks whether a time matches on both the tutor's and tutee's availability
+	 * schedule
+	 * 
+	 * @param tutee
+	 *            - The target tutee
+	 * @param tutor
+	 *            - The target tutor
 	 * @return true if a match is found, false if not
 	 */
 	public boolean checkTimes(Tutee tutee, Tutor tutor) {
@@ -31,11 +40,14 @@ public class Compatibility {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Checks whether it is possible to match the tutee to a tutor
-	 * @param tutee - The target tutee
-	 * @param tutor - The target tutor
+	 * 
+	 * @param tutee
+	 *            - The target tutee
+	 * @param tutor
+	 *            - The target tutor
 	 * @return true if a match is found, false if not
 	 */
 	public boolean checkCompatible(Tutee tutee, Tutor tutor) {
@@ -43,6 +55,52 @@ public class Compatibility {
 			if (checkTimes(tutee, tutor))
 				return true;
 		return false;
+	}
+
+	/**
+	 * Attempts to form a group of tutees for the same assignment
+	 * 
+	 * @param target
+	 *            - The index of the original tutee
+	 * @param time
+	 *            - The time of the assignment
+	 * @param maxSize
+	 *            - The maximum size of the group
+	 * @param tutees
+	 *            - The array of tutees
+	 * @return a list of the names of the other tutees in the group
+	 */
+	public ArrayList<String> formGroup(int target, int time, int maxSize, Tutee[] tutees) {
+		ArrayList<String> group = new ArrayList<String>();
+		int curSize = 1;
+
+		boolean run = false;
+		if (maxSize > curSize)
+			run = true;
+
+		int index = 0;
+		while (run) {
+			if (index == target)
+				for (int i = 0; i < tutees[index].coursesSize(); i++)
+					if (tutees[index].getCourse(i).equals(tutees[target].getCourse(0)))
+						if (tutees[index].getGroupSize(i) > curSize)
+							for (int j = 0; j < tutees[index].timesSize(); j++)
+								if (tutees[index].getTime(j) == time) {
+									group.add(tutees[index].getName());
+									curSize++;
+									if (tutees[index].getGroupSize(i) < maxSize)
+										maxSize = tutees[index].getGroupSize(i);
+								}
+
+			index++;
+
+			if (!(maxSize > curSize))
+				run = false;
+			if (index == tutees.length)
+				run = false;
+		}
+
+		return group;
 	}
 
 }
