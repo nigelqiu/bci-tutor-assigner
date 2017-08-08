@@ -18,7 +18,7 @@ public class FileWriter {
 				input += line + '\n';
 			}
 			reader.close();
-			input += "Tutee -" + name + "- could not be assigned for target course -" + course +"- \n\n";
+			input += "Tutee (" + name + ") could not be assigned for target course (" + course +") \n\n";
 			// Initializing file output stream
 			FileOutputStream out = new FileOutputStream("Assignments.txt");
 			// Writing file
