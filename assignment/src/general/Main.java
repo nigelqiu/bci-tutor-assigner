@@ -49,6 +49,7 @@ public class Main {
 		int targetTutee = ThreadLocalRandom.current().nextInt(0, unchecked.size());
 		// Boolean to mark whether the current tutee is able to be assigned
 		boolean canAssign;
+		// List of the names of the tutees which only have one possible tutor
 		ArrayList<String> oneMatch = new ArrayList<String>();
 		// Main while loop
 		while (run) {
@@ -64,14 +65,17 @@ public class Main {
 						canAssign = true;
 					}
 				}
-				
-				// If the tutee can not be assigned, print a non-assignment statement
-				if (!canAssign)
+
+				// If the tutee can not be assigned, print a non-assignment statement and set
+				// the tutee as assigned
+				if (!canAssign) {
 					write.writeNonAssignment(tutees[targetTutee].getName(), tutees[targetTutee].getCourse(0));
+					tutees[targetTutee].setAssigned(true);
+				}
 
 				// Remove the tutee from the unchecked list
 				unchecked.remove(targetTutee);
-				
+
 				// If the size of unchecked is not zero, find a new target tutee
 				if (unchecked.size() != 0)
 					targetTutee = ThreadLocalRandom.current().nextInt(0, unchecked.size());
@@ -79,13 +83,22 @@ public class Main {
 				else
 					break;
 			}
-			
-			
+
 			for (int i = 0; i < tutees.length; i++) {
-				
+				if (tutees[i].possibleTutorsSize() == 1)
+					oneMatch.add(tutees[i].getName());
+			}
+			
+			if (oneMatch.size() > 0) {
+				String target = oneMatch.get(ThreadLocalRandom.current().nextInt(0, oneMatch.size()));
+				for (int i = 0; i < tutees.length; i++) {
+					if (tutees[i].getName().equals(target)) {
+						tutees[i].setAssigned(true);
+					}
+				}
 			}
 		}
-		
+
 	}
 
 }
