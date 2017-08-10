@@ -80,15 +80,25 @@ public class Compatibility {
 
 		int index = 0;
 		while (run) {
-			if (index == target)
+			// If the current index is not the same as the target index
+			if (index != target)
+				// For each course requested by the tutee
 				for (int i = 0; i < tutees[index].coursesSize(); i++)
+					// If the current course is the same as the target course
 					if (tutees[index].getCourse(i).equals(tutees[target].getCourse(0)))
+						// If the tutee's group size is more than the current size of the group
 						if (tutees[index].getGroupSize(i) > curSize)
+							// For each time slot requested by the tutee
 							for (int j = 0; j < tutees[index].timesSize(); j++)
+								// If the current time slot is the same as the target time slot
 								if (tutees[index].getTime(j) == time) {
+									// Add the tutee's name to the group
 									group.add(tutees[index].getName());
+									// Increment current group size
 									curSize++;
+									// If the tutee's group size is less than the maximum group size
 									if (tutees[index].getGroupSize(i) < maxSize)
+										// Make the tutee's group size the maximum group size
 										maxSize = tutees[index].getGroupSize(i);
 								}
 
