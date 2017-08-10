@@ -50,7 +50,7 @@ public class Main {
 		// Boolean to mark whether the current tutee is able to be assigned
 		boolean canAssign;
 		// List of the names of the tutees which only have one possible tutor
-		ArrayList<String> oneMatch = new ArrayList<String>();
+		ArrayList<Integer> oneMatch = new ArrayList<Integer>();
 		// Main while loop
 		while (run) {
 			// Compatibility checking loop
@@ -86,16 +86,12 @@ public class Main {
 
 			for (int i = 0; i < tutees.length; i++) {
 				if (tutees[i].possibleTutorsSize() == 1)
-					oneMatch.add(tutees[i].getName());
+					oneMatch.add(i);
 			}
 			
 			if (oneMatch.size() > 0) {
-				String target = oneMatch.get(ThreadLocalRandom.current().nextInt(0, oneMatch.size()));
-				for (int i = 0; i < tutees.length; i++) {
-					if (tutees[i].getName().equals(target)) {
-						tutees[i].setAssigned(true);
-					}
-				}
+				int target = oneMatch.get(ThreadLocalRandom.current().nextInt(0, oneMatch.size()));
+				
 			}
 		}
 
