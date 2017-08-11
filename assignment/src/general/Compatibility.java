@@ -36,7 +36,7 @@ public class Compatibility {
 				for (int j = 0; j < tutors[i].timesSize(); j++)
 					for (int k = 0; k < tutee.timesSize(); k++)
 						if (tutors[i].getTime(j) == tutee.getTime(k)) {
-							tutee.addPossibleTutor(tutors[i].getName());
+							tutee.addPossibleTutor(i);
 							tutee.addPossibleTime(tutors[i].getTime(j));
 						}
 		return tutee;
