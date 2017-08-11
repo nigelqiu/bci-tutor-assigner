@@ -85,11 +85,8 @@ public class Main {
 					int target = match.get(ThreadLocalRandom.current().nextInt(0, match.size()));
 					int session = ThreadLocalRandom.current().nextInt(0, tutees[target].possibleTutorsSize());
 					int time = tutees[target].getPossibleTime(session);
-					for (int i = 0; i < tutors.length; i++) {
-						if (tutees[target].getPossibleTutor(session).equals(tutors[i].getName())) {
-							
-						}
-					}
+					int size = Math.min(tutees[target].getGroupSize(0), tutors[tutees[target].getPossibleTutor(session)].getGroupSize(0));
+					ArrayList<Integer> group = compatible.formGroup(target, time, size, tutees);
 				}
 
 				amount++;
