@@ -32,13 +32,14 @@ public class Compatibility {
 	 */
 	public Tutee checkCompatible(Tutee tutee, Tutor[] tutors) {
 		for (int i = 0; i < tutors.length; i++)
-			if (checkCourses(tutee.getCourse(0), tutors[i]))
-				for (int j = 0; j < tutors[i].timesSize(); j++)
-					for (int k = 0; k < tutee.timesSize(); k++)
-						if (tutors[i].getTime(j) == tutee.getTime(k)) {
-							tutee.addPossibleTutor(i);
-							tutee.addPossibleTime(tutors[i].getTime(j));
-						}
+			if (tutors[i].getCurSessions() != tutors[i].getMaxSessions())
+				if (checkCourses(tutee.getCourse(0), tutors[i]))
+					for (int j = 0; j < tutors[i].timesSize(); j++)
+						for (int k = 0; k < tutee.timesSize(); k++)
+							if (tutors[i].getTime(j) == tutee.getTime(k)) {
+								tutee.addPossibleTutor(i);
+								tutee.addPossibleTime(tutors[i].getTime(j));
+							}
 		return tutee;
 	}
 
