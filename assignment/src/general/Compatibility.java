@@ -22,39 +22,24 @@ public class Compatibility {
 	}
 
 	/**
-	 * Checks whether a time matches on both the tutor's and tutee's availability
-	 * schedule
+	 * Finds tutoring sessions between a tutee and all the tutors
 	 * 
 	 * @param tutee
 	 *            - The target tutee
-	 * @param tutor
-	 *            - The target tutor
-	 * @return true if a match is found, false if not
+	 * @param tutors
+	 *            - The Array of all tutors
+	 * @return tutee with all possible tutoring sessions added
 	 */
-	public boolean checkTimes(Tutee tutee, Tutor tutor) {
-		for (int i = 0; i < tutee.timesSize(); i++) {
-			for (int j = 0; j < tutor.timesSize(); j++) {
-				if (tutor.getTime(j) == (tutee.getTime(i)))
-					return true;
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * Checks whether it is possible to match the tutee to a tutor
-	 * 
-	 * @param tutee
-	 *            - The target tutee
-	 * @param tutor
-	 *            - The target tutor
-	 * @return true if a match is found, false if not
-	 */
-	public boolean checkCompatible(Tutee tutee, Tutor tutor) {
-		if (checkCourses(tutee.getCourse(0), tutor))
-			if (checkTimes(tutee, tutor))
-				return true;
-		return false;
+	public Tutee checkCompatible(Tutee tutee, Tutor[] tutors) {
+		for (int i = 0; i < tutors.length; i++)
+			if (checkCourses(tutee.getCourse(0), tutors[i]))
+				for (int j = 0; j < tutors[i].timesSize(); j++)
+					for (int k = 0; k < tutee.timesSize(); k++)
+						if (tutors[i].getTime(j) == tutee.getTime(k)) {
+							tutee.addPossibleTutor(tutors[i].getName());
+							tutee.addPossibleTime(tutors[i].getTime(j));
+						}
+		return tutee;
 	}
 
 	/**
