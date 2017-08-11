@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Tutee extends Person {
 
-	// List storing the name of the tutor for every possible instance of a tutoring
+	// List storing the index of the tutor for every possible instance of a tutoring
 	// session for the current course
-	private ArrayList<String> possibleTutors = new ArrayList<String>();
+	private ArrayList<Integer> possibleTutors = new ArrayList<Integer>();
 	// List storing the time for every possible instance of a tutoring sessions for
 	// the current course
 	private ArrayList<Integer> possibleTimes = new ArrayList<Integer>();
@@ -14,11 +14,11 @@ public class Tutee extends Person {
 	private boolean assigned;
 
 	// Methods for List possibleTutors
-	public void addPossibleTutor(String name) {
-		possibleTutors.add(name);
+	public void addPossibleTutor(int num) {
+		possibleTutors.add(num);
 	}
 
-	public String getPossibleTutor(int index) {
+	public int getPossibleTutor(int index) {
 		return possibleTutors.get(index);
 	}
 
