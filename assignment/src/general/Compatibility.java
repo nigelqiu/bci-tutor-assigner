@@ -53,7 +53,7 @@ public class Compatibility {
 	 *            - The maximum size of the group
 	 * @param tutees
 	 *            - The array of tutees
-	 * @return a list of the names of the other tutees in the group
+	 * @return a list of the indices of the other tutees in the group
 	 */
 	public ArrayList<Integer> formGroup(int target, int time, int maxSize, Tutee[] tutees) {
 		ArrayList<Integer> group = new ArrayList<Integer>();
