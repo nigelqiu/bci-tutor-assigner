@@ -47,28 +47,18 @@ public class Main {
 		// Integer assigned a random number within possible unchecked index values to
 		// randomly select a tutee
 		int targetTutee = ThreadLocalRandom.current().nextInt(0, unchecked.size());
-		// Boolean to mark whether the current tutee is able to be assigned
-		boolean canAssign;
 		// List of the names of the tutees which only have one possible tutor
-		ArrayList<Integer> oneMatch = new ArrayList<Integer>();
+		ArrayList<Integer> match = new ArrayList<Integer>();
 		// Main while loop
 		while (run) {
 			// Compatibility checking loop
 			while (true) {
-				canAssign = false;
-				// For loop to check the compatibility between each tutor and the target tutee
-				for (int i = 0; i < tutors.length; i++) {
-					// If a match is found, add the tutor's name to the list of possible tutors for
-					// this tutee and mark the tutee as possible to assign
-					if (compatible.checkCompatible(tutees[targetTutee], tutors[i])) {
-						tutees[targetTutee].addPossibleTutor(tutors[i].getName());
-						canAssign = true;
-					}
-				}
+				// Adds all possible tutoring sessions to the target tutee
+				tutees[targetTutee] = compatible.checkCompatible(tutees[targetTutee], tutors);
 
 				// If the tutee can not be assigned, print a non-assignment statement and set
 				// the tutee as assigned
-				if (!canAssign) {
+				if (tutees[targetTutee].possibleTutorsSize() == 0) {
 					write.writeNonAssignment(tutees[targetTutee].getName(), tutees[targetTutee].getCourse(0));
 					tutees[targetTutee].setAssigned(true);
 				}
@@ -84,14 +74,25 @@ public class Main {
 					break;
 			}
 
-			for (int i = 0; i < tutees.length; i++) {
-				if (tutees[i].possibleTutorsSize() == 1)
-					oneMatch.add(i);
-			}
-			
-			if (oneMatch.size() > 0) {
-				int target = oneMatch.get(ThreadLocalRandom.current().nextInt(0, oneMatch.size()));
-				
+			int amount = 1;
+			while (true) {
+				for (int i = 0; i < tutees.length; i++) {
+					if (tutees[i].possibleTutorsSize() == amount)
+						match.add(i);
+				}
+
+				if (match.size() > 0) {
+					int target = match.get(ThreadLocalRandom.current().nextInt(0, match.size()));
+					int session = ThreadLocalRandom.current().nextInt(0, tutees[target].possibleTutorsSize());
+					int time = tutees[target].getPossibleTime(session);
+					for (int i = 0; i < tutors.length; i++) {
+						if (tutees[target].getPossibleTutor(session).equals(tutors[i].getName())) {
+							
+						}
+					}
+				}
+
+				amount++;
 			}
 		}
 
