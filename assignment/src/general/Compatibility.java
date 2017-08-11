@@ -55,8 +55,8 @@ public class Compatibility {
 	 *            - The array of tutees
 	 * @return a list of the names of the other tutees in the group
 	 */
-	public ArrayList<String> formGroup(int target, int time, int maxSize, Tutee[] tutees) {
-		ArrayList<String> group = new ArrayList<String>();
+	public ArrayList<Integer> formGroup(int target, int time, int maxSize, Tutee[] tutees) {
+		ArrayList<Integer> group = new ArrayList<Integer>();
 		int curSize = 1;
 
 		boolean run = false;
@@ -78,7 +78,7 @@ public class Compatibility {
 								// If the current time slot is the same as the target time slot
 								if (tutees[index].getTime(j) == time) {
 									// Add the tutee's name to the group
-									group.add(tutees[index].getName());
+									group.add(i);
 									// Increment current group size
 									curSize++;
 									// If the tutee's group size is less than the maximum group size
