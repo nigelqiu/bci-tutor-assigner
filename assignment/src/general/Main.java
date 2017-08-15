@@ -58,7 +58,7 @@ public class Main {
 					break;
 			}
 
-			// 
+			//
 			int amount = 1;
 			// Assignment forming loop
 			while (true) {
@@ -83,9 +83,14 @@ public class Main {
 					// Indices of all the tutees in a group
 					ArrayList<Integer> group = compatible.formGroup(target, time, maxGroup, tutees);
 					group.add(target);
-					
+
+					// Begin printing assignment statement
+					write.startAssignment();
+
 					// For loop to go through all tutees in the group
 					for (int i = 0; i < group.size(); i++) {
+						// Continue printing assignment statement
+						write.continueAssignment(tutees[i].getName());
 						// Set the tutee as assigned
 						tutees[i].setAssigned(true);
 						// For loop to go through all the time slots of the tutee
@@ -97,13 +102,17 @@ public class Main {
 							}
 						}
 					}
-					
+
+					// Finish printing assignment statement
+					write.endAssignment(tutees[target].getCourse(0), time,
+							tutors[tutees[target].getPossibleTutor(session)].getName());
+
 					// Increment the session count of the group's tutor
 					tutors[tutees[target].getPossibleTutor(session)].increaseCurSessions();
-					
+
 					// Clear toAssign
 					toAssign.clear();
-					
+
 					// Exit this while loop
 					break;
 				} else
