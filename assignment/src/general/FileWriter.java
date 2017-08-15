@@ -77,7 +77,7 @@ public class FileWriter {
 		}
 	}
 
-	public void endAssignment(String course, String time, String tutor) {
+	public void endAssignment(String course, int time, String tutor) {
 		// Initializing buffered reader
 		try (BufferedReader reader = Files.newBufferedReader(assignmentsFile)) {
 			String line;
