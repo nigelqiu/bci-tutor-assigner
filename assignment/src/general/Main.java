@@ -20,23 +20,21 @@ public class Main {
 
 		// Boolean to run main while loop
 		Boolean run = true;
-		// Precondition check to see if it is possible to run the main program
-		if (tutees.length == 0 || tutors.length == 0)
-			run = false;
-		// List of tutees' names which have not been checked for compatible tutors
-		ArrayList<String> unchecked = new ArrayList<String>(tutees.length);
-		// Adding all the tutee's names to the list
-		for (int i = 0; i < tutees.length; i++)
-			unchecked.add(tutees[i].getName());
-		// Integer assigned a random number within possible unchecked index values to
-		// randomly select a tutee
-		int targetTutee = ThreadLocalRandom.current().nextInt(0, unchecked.size());
-		// List of indices of the tutees which have the target number of tutors
-		ArrayList<Integer> toAssign = new ArrayList<Integer>();
 		// Main while loop
 		while (run) {
+			// List of tutees' indices which have not been checked for compatible tutors
+			ArrayList<Integer> unchecked = new ArrayList<Integer>(tutees.length);
+			// Adding adding the index of all tutees that are not assigned
+			for (int i = 0; i < tutees.length; i++)
+				if (!tutees[i].isAssigned())
+					unchecked.add(i);
+			// Boolean to run while loops if there are tutees to check for
+			boolean attempt = unchecked.size() > 0;
+			// Integer assigned an random index value from unchecked to randomly select a
+			// tutee
+			int targetTutee = unchecked.get(ThreadLocalRandom.current().nextInt(0, unchecked.size()));
 			// Compatibility checking loop
-			while (true) {
+			while (attempt) {
 				// Adds all possible tutoring sessions to the target tutee
 				tutees[targetTutee] = compatible.checkCompatible(tutees[targetTutee], tutors);
 
@@ -50,18 +48,19 @@ public class Main {
 				// Remove the tutee from the unchecked list
 				unchecked.remove(targetTutee);
 
-				// If the size of unchecked is not zero, find a new target tutee
-				if (unchecked.size() != 0)
-					targetTutee = ThreadLocalRandom.current().nextInt(0, unchecked.size());
-				// Else, break this compatibility checking loop
+				// If the size of unchecked is more than zero, find a new target tutee
+				if (unchecked.size() > 0)
+					targetTutee = unchecked.get(ThreadLocalRandom.current().nextInt(0, unchecked.size()));
 				else
 					break;
 			}
 
-			//
+			// List of indices of the tutees which have the target number of tutors
+			ArrayList<Integer> toAssign = new ArrayList<Integer>();
+			// Number of possible tutors for current assignment search
 			int amount = 1;
 			// Assignment forming loop
-			while (true) {
+			while (attempt) {
 				// For loop to go through all the tutees
 				for (int i = 0; i < tutees.length; i++) {
 					// If the tutee has amount number of tutors, add them to toAssign
@@ -118,6 +117,45 @@ public class Main {
 				} else
 					// Increment amount
 					amount++;
+			}
+
+			// If the while loops were not run
+			if (!attempt) {
+				for (int i = 0; i < tutees.length; i++) {
+					tutees[i].setAssigned(false);
+					tutees[i].removeCourse(0);
+					if (tutees[i].coursesSize() == 0) {
+						Tutee[] newTutees = new Tutee[tutees.length - 1];
+						int index = 0;
+						for (Tutee tutee : tutees)
+							if (tutee != tutees[i]) {
+								newTutees[index] = tutee;
+								index++;
+							}
+						tutees = newTutees;
+						i--;
+					}
+				}
+				if (tutees.length == 0) {
+					run = false;
+					System.out.println("All tutees assigned.");
+				}
+			} else {
+				// Resetting values to run main loop again
+				for (int i = 0; i < tutees.length; i++) {
+					tutees[i].clearPossibleTutors();
+					tutees[i].clearPossibleTimes();
+				}
+				// 
+				for (int i = 0; i < tutors.length; i++) {
+					
+				}
+			}
+
+			// If there are no more tutors, exit the main loop and print out a message
+			if (tutors.length == 0) {
+				run = false;
+				System.out.println("All tutors assigned.");
 			}
 		}
 
