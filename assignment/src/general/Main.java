@@ -37,7 +37,7 @@ public class Main {
 			while (attempt) {
 				// Adds all possible tutoring sessions to the target tutee
 				tutees[targetTutee] = compatible.checkCompatible(tutees[targetTutee], tutors);
-
+				
 				// If the tutee can not be assigned, print a non-assignment statement and set
 				// the tutee as assigned
 				if (tutees[targetTutee].possibleTutorsSize() == 0) {
@@ -46,7 +46,7 @@ public class Main {
 				}
 
 				// Remove the tutee from the unchecked list
-				unchecked.remove(targetTutee);
+				unchecked.remove(unchecked.indexOf(targetTutee));
 
 				// If the size of unchecked is more than zero, find a new target tutee
 				if (unchecked.size() > 0)
@@ -124,7 +124,7 @@ public class Main {
 				for (int i = 0; i < tutees.length; i++) {
 					tutees[i].setAssigned(false);
 					tutees[i].removeCourse(0);
-					if (tutees[i].coursesSize() == 0) {
+					if (tutees[i].coursesSize() == 0 || tutees[i].timesSize() == 0) {
 						Tutee[] newTutees = new Tutee[tutees.length - 1];
 						int index = 0;
 						for (Tutee tutee : tutees)

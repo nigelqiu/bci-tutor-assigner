@@ -65,7 +65,7 @@ public class FileWriter {
 			}
 			reader.close();
 			// Removing last new line character
-			input = input.substring(0, input.length() - 2);
+			input = input.substring(0, input.length() - 1);
 			// Preparing addition to file
 			input += " " + name + " ";
 			// Initializing file output stream
@@ -90,7 +90,7 @@ public class FileWriter {
 			}
 			reader.close();
 			// Removing last new line character
-			input = input.substring(0, input.length() - 2);
+			input = input.substring(0, input.length() - 1);
 			// Preparing addition to file
 			input += ") are assigned for target course (" + course + ") at time slot (" + time + ") with tutor ("
 					+ tutor + ") \n\n";
